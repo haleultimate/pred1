@@ -1,0 +1,5 @@
+[1] "Start time: 2016-11-29 22:24:20"
+[1] "Start time: 2016-11-29 22:26:01"
+character(0)
+ [1] "AIG"   "BAC"   "BRK-B" "C"     "CB"    "GS"    "JPM"   "USB"   "WFC"   "XLF"  
+[1] TRUE
