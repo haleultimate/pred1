@@ -13,8 +13,12 @@ names(rnd.env$fun_id) <- c('calc_cap','calc_z','calc_res','calc_decay','calc_vlt
 
 rnd.env$prob$choices <- c('type','cap','math','scale','decay','bin')
 rnd.env$prob$choices.wts <- c(0.1,0.2,0.0,0.3,0.3,0.4) 
+rnd.env$prob$choices.bv <- c('type','cap','scale','decay')
+rnd.env$prob$choices.bv.wts <- c(0.1,0.2,0.,0.2)
 rnd.env$prob$type <- c("ret","res","vlt","vol","vrs")
 rnd.env$prob$type.wts <- c(0.4,0.5,0.1,0.1,0.1)
+rnd.env$prob$type.bv <- rnd.env$prob$type
+rnd.env$prob$type.bv.wts <- c(0.1,0.1,0.02,0.1,0.1)
 rnd.env$prob$cap <- c("abscap","cap_pct","zcap","none")
 rnd.env$prob$cap.wts <- c(0.1,0.4,0.2,0.3)
 rnd.env$prob$abscap <- c(.13,.08,.05,.03,.02,.01,.005,.003)
