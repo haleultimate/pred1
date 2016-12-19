@@ -134,6 +134,7 @@ vif_func<-function(in_frame,thresh=10,trace=T){
   #get initial vif value for all comparisons of variables
   vif_init<-NULL
   var_names <- names(in_frame)
+  if(trace==T) print(var_names)
   for(val in var_names){
     regressors <- var_names[-which(var_names == val)]
     form <- paste(regressors, collapse = '+')
@@ -144,6 +145,7 @@ vif_func<-function(in_frame,thresh=10,trace=T){
   keep.dat <- !(vif_init[,2] %in% c("NaN","Inf")) #RHB
   vif_init <- vif_init[keep.dat,]                 #RHB
   in_frame <- in_frame[,keep.dat]                 #RHB
+  var_names <- names(in_frame)                    #RHB
   vif_max  <- max(as.numeric(vif_init[,2]))
   
   if(vif_max < thresh){

@@ -37,7 +37,7 @@ for (nam in delete_vcom_name) {
 
 print(length(com.env$v.com))
 
-if (com.env$model_loops > 1) {
+if (com.env$model_loops != l) {
   print("Removing var environment")
   rm(var.env)
   var.env <- new.env()

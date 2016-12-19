@@ -46,7 +46,12 @@ rnd_val <- function(choice,type="model") {
 unique_name <- function(name,id,first=TRUE) {
   #print(paste("name=",name,"id=",id,"first=",first))
   if (name %in% com.env$vcom_names) {
-    old_id <- com.env$v.com[[(which(name==com.env$vcom_names))]]$ID
+    for (i in 1:length(com.env$v.com)) {
+      if (name %in% com.env$v.com[[i]]$name) {
+        old_id <- com.env$v.com[[i]]$ID
+        break
+      }
+    }  
     #print(paste("id",id,"old_id",old_id,which(name==com.env$vcom_names),com.env$v.com[[11]]$ID))
     if (id == old_id) return(-1)
     if (first) {
@@ -224,6 +229,7 @@ rnd_var <- function(var_type='model') {
   } else {
     cmd_string <- paste("com.env$v.com$",vcom.name," <- V1",sep="")
     if (var_type == "model") print(cmd_string)
+    if (vcom.name == "CCret") print(V1)
     eval(parse(text=cmd_string))
     com.env$vcom_names <- c(com.env$vcom_names,V1$name)
     #if (var_type == "model") com.env$ind_names <- c(com.env$ind_names,V1$name)

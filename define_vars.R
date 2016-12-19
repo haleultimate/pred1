@@ -53,7 +53,7 @@ rm(V3)
 
 V4 <- NULL
 V4$col <- 4
-V4$name <- "CCret_pred"
+V4$name <- "CCretp"
 V4$tier <- 4
 V4$requires <- c("C","YC","CCraw")
 V4$ID <- 1101005
@@ -63,7 +63,7 @@ V4$calc_cmn <- TRUE
 V4$math[1] <- "from.var.env,'CCraw'"
 V4$math[2] <- "calc_cap,abscap=0.05"
 
-com.env$v.com$CCret <- V4
+com.env$v.com$CCretp <- V4
 com.env$vcom_names <- c(com.env$vcom_names,V4$name)
 rm(V4)
 

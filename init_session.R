@@ -125,11 +125,11 @@ cmn_lookup['XLF'] <- 'cmn'
 cmns <- 1
 
 verbose <- FALSE
-com.env$model_loops <- 1
-com.env$add_vars <- 5
+com.env$model_loops <- 10
+com.env$add_vars <- 4
 #run_type <- "add_vars"
 #insample.r2.threshold <- 0.02
-predict.ret <- "CCret"    #should be set up as first model_var in v.com (define_vars.R)
+predict.ret <- "CCretp"    #should be set up as first model_var in v.com (define_vars.R)
 com.env$reg_start_date <- "200407"
 com.env$reg_end_date <- "2011"
 com.env$OOS_end_date <- "2012"
