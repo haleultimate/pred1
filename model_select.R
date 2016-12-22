@@ -72,6 +72,14 @@ model.select <- function(model,keep,sig=0.05,verbose=F){
     while(T){
       dropvar <- names(pval)[i]
       check.terms <- terms[-match(dropvar,terms)]
+      if (length(check.terms)==0) {
+        #print("**********************error in model_selection*************************")
+        #print(dropvar)
+        #print(check.terms)
+        #print(names(pval))
+        #print(terms)
+        break
+      }
       x <- has.interaction(dropvar,check.terms)
       if(x){i=i+1;next} else {break}              
     } # end while(T) drop var
@@ -103,15 +111,21 @@ model.select <- function(model,keep,sig=0.05,verbose=F){
 oos.r2 <- function(model,df.oos) {
   predicted.model <- predict.lm(model,newdata=df.oos)
   test.y <- df.oos[,predict.ret]
-  SS.total      <- sum((test.y - mean(test.y))^2)
+  mean.test.y <- mean(test.y)
+  SS.total      <- sum((test.y - mean.test.y)^2)
   SS.residual   <- sum((test.y - predicted.model)^2)
-  SS.regression <- sum((predicted.model - mean(test.y))^2)
-  SS.total - (SS.regression+SS.residual)
+  #SS.regression <- sum((predicted.model - mean(test.y))^2)
+  #SS.total - (SS.regression+SS.residual)
   test <- NULL
-  test$rsq <- 1 - SS.residual/SS.total  
+  test$rsq <- 1 - (SS.residual/SS.total)  
   results <- cbind(predict.lm(model,newdata=df.oos),df.oos[,predict.ret])
   test$cor <- cor(results,use="complete.obs")[1,2]
-  #print(paste(test$rsq,test$cor))
+  test$mse <- mean((test.y-predicted.model)^2)
+  cnt <- length(predicted.model)
+  wincnt <- 0
+  for (i in 1:length(predicted.model)) if (abs(test.y[i]-predicted.model[i]) < abs(test.y[i])) wincnt <- wincnt + 1
+  test$winpct <- wincnt/cnt
+  #print(test)
   return(test)
 }
 

@@ -29,11 +29,16 @@ for (i in vvars) {
 
 #get data for all stx into single data frame
 reg_data.df <- NULL
+OOS_data.df <- NULL
 for (i in 1:stx) {
   ticker <- stx.symbols[i]
   subset_string <- paste("var.env$",ticker,"[com.env$reg_date_range,allmodelvars]",sep="")
   cmd_string <- paste("reg_data.df <- bind_rows(reg_data.df,as.data.frame(",subset_string,"))",sep="")
   #if (verbose) print(cmd_string)
+  eval(parse(text=cmd_string))
+  subset_string <- paste("var.env$",ticker,"[com.env$OOS_date_range,allmodelvars]",sep="")
+  cmd_string <- paste("OOS_data.df <- bind_rows(OOS_data.df,as.data.frame(",subset_string,"))",sep="")
+  #print(cmd_string)
   eval(parse(text=cmd_string))
 }
 #str(reg_data.df)

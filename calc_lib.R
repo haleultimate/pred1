@@ -31,6 +31,16 @@ from.var.env <- function(ve.xts,coln,field) {
   eval(parse(text=cmd_string))
 }
 
+calc_look_forward <- function(ve.xts,coln,lf=-1) {
+  cmd_string <- paste("tmp <- ",ve.xts,"[,'C']",sep="")
+  #print(cmd_string)
+  eval(parse(text=cmd_string))
+  tmp <- stats::lag(tmp,lf)
+  cmd_string <- paste(ve.xts," <- cbind(",ve.xts,",log(tmp/",ve.xts,"[,'C']))",sep="")
+  #print(cmd_string)
+  eval(parse(text=cmd_string))
+}
+
 calc_lag <- function(ve.xts,coln,lag=1) {  #always lag coln
   #if (verbose) print(paste("calc_lag:","ve.xts=",ve.xts,"lag=",lag))
   cmd_string <- paste(ve.xts,"[,",coln,"] <- stats::lag(",ve.xts,"[,",coln,"],",lag,")",sep="")
@@ -119,10 +129,21 @@ calc_z <- function(ve.xts,coln,ma=TRUE) { #compute zscore/zscale on coln
   #ve.xts <- paste("var.env$",ticker,sep="")
   #cmd_string <- paste("col <- ncol(",ve.xts,")",sep="")
   #eval(parse(text=cmd_string))
-  data_string <- paste(ve.xts,"[,",coln,"]",sep="")
-  cmd_str <- paste(data_string," <- scale(",data_string,",center=ma)",sep="")
-  #if (verbose) print (cmd_str)
-  eval(parse(text=cmd_str))
+  data_string <- paste(ve.xts,"[com.env$reg_date_range,",coln,"]",sep="")
+  out_string <- paste(ve.xts,"[,",coln,"]",sep="")
+  cmd_string <- paste("sd_val <- sd(",data_string,",na.rm=TRUE)",sep="")
+  #print(cmd_string)
+  eval(parse(text=cmd_string))
+  mean_val <- 1
+  if (ma) {
+    cmd_string <- paste("mean_val <- mean(",data_string,",na.rm=TRUE)",sep="")
+    #print(cmd_string)
+    eval(parse(text=cmd_string))
+  }
+  #print(paste("mean_val=",mean_val,"sd_val=",sd_val))
+  cmd_string <- paste(out_string," <- (",out_string," - sd_val)/mean_val",sep="")
+  #print (cmd_string)
+  eval(parse(text=cmd_string))
   #df.zscore <- scale(df,center=ma)
 }
 

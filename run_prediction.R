@@ -16,9 +16,15 @@ for (l in 1:com.env$model_loops) {              #start model loop
   source("collect_data.R")                      #get regression data frame
   print(paste("Data Collected:",Sys.time()))
   source("run_regression.R")                    #run regression
-  if (summary(model.stepwise)$adj.r.squared > 0.10) break
+  #if (summary(model.stepwise)$adj.r.squared > 0.10) break
   source("clean_vcom.R")                        #delete useless variables
 
 }                                               #end model loop
+#print(paste("stepwise model started",Sys.time()))
+#model.stepwise <- model.select(reg.model,sig=0.001,verbose=FALSE)
+#print(summary(model.stepwise))
+#oos_stats <- oos.r2(model.stepwise,OOS_data.df)
+#print(oos_stats)
+
 
 source("close_session.R")

@@ -93,8 +93,8 @@ com.env <- new.env()
 #Init data_load vars
 Sys.setenv(TZ = "UTC")
 adjustment <- TRUE
-start_date <- "2004-01-01" #"2004-01-01"
-end_date <- "2012-12-31"
+start_date <- "2004-01-01" 
+end_date <- "2013-03-31"
 if (!exists("stx_list.old")) {         #only load if stx_list has changed
   getSymbols(Symbols = stx_list,
              env=data.env,
@@ -126,15 +126,15 @@ cmns <- 1
 
 verbose <- FALSE
 com.env$model_loops <- 10
-com.env$add_vars <- 4
+com.env$add_vars <- 10
 #run_type <- "add_vars"
 #insample.r2.threshold <- 0.02
-predict.ret <- "CCretp"    #should be set up as first model_var in v.com (define_vars.R)
+predict.ret <- "C2Clf8p"    #should be set up as first model_var in v.com (define_vars.R)
 com.env$reg_start_date <- "200407"
 com.env$reg_end_date <- "2011"
 com.env$OOS_end_date <- "2012"
 com.env$reg_date_range <- paste(com.env$reg_start_date,"/",com.env$reg_end_date,sep="")
-com.env$OOS_date_range <- com.env$OOS_end_date
+com.env$OOS_date_range <- paste(com.env$reg_end_date,"/",com.env$OOS_end_date,sep="")
 
 corr.threshold <- 0.6
 #v.com <- NULL

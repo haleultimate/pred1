@@ -22,50 +22,66 @@ rm(V1)
 
 V2 <- NULL
 V2$col <- 2
-V2$name <- "YC"
+V2$name <- "C2Clf8p"
 V2$tier <- 2
 V2$requires <- "C"
-V2$ID <- 11
-V2$type <- "Price"
-V2$use <- "calc"
+V2$ID <- 1205
+V2$type <- "Ret"
+V2$use <- "model"
 V2$calc_cmn <- TRUE
-V2$math[1] <- "from.var.env,'C'"
-V2$math[2] <- "calc_lag,1"
+V2$math[1] <- "calc_look_forward,-8"
+V2$math[2] <- "calc_cap,abscap=0.05"
 
-com.env$v.com$YC <- V2
+com.env$v.com$C2Clf8p <- V2
 com.env$vcom_names <- c(com.env$vcom_names,V2$name)
 rm(V2)
 
-V3 <- NULL
-V3$col <- 3
-V3$name <- "CCraw"
-V3$tier <- 3
-V3$requires <- c("C","YC")
-V3$ID <- 1101
-V3$type <- "Ret"
-V3$use <- "calc"
-V3$calc_cmn <- TRUE
-V3$math[1] <- "calc_ret,'YC','C'"
-
-com.env$v.com$CCret_raw <- V3
-com.env$vcom_names <- c(com.env$vcom_names,V3$name)
-rm(V3)
-
-V4 <- NULL
-V4$col <- 4
-V4$name <- "CCretp"
-V4$tier <- 4
-V4$requires <- c("C","YC","CCraw")
-V4$ID <- 1101005
-V4$type <- "Ret"
-V4$use <- "model"
-V4$calc_cmn <- TRUE
-V4$math[1] <- "from.var.env,'CCraw'"
-V4$math[2] <- "calc_cap,abscap=0.05"
-
-com.env$v.com$CCretp <- V4
-com.env$vcom_names <- c(com.env$vcom_names,V4$name)
-rm(V4)
+# V2 <- NULL
+# V2$col <- 2
+# V2$name <- "YC"
+# V2$tier <- 2
+# V2$requires <- "C"
+# V2$ID <- 11
+# V2$type <- "Price"
+# V2$use <- "calc"
+# V2$calc_cmn <- TRUE
+# V2$math[1] <- "from.var.env,'C'"
+# V2$math[2] <- "calc_lag,1"
+# 
+# com.env$v.com$YC <- V2
+# com.env$vcom_names <- c(com.env$vcom_names,V2$name)
+# rm(V2)
+# 
+# V3 <- NULL
+# V3$col <- 3
+# V3$name <- "CCraw"
+# V3$tier <- 3
+# V3$requires <- c("C","YC")
+# V3$ID <- 1101
+# V3$type <- "Ret"
+# V3$use <- "calc"
+# V3$calc_cmn <- TRUE
+# V3$math[1] <- "calc_ret,'YC','C'"
+# 
+# com.env$v.com$CCret_raw <- V3
+# com.env$vcom_names <- c(com.env$vcom_names,V3$name)
+# rm(V3)
+# 
+# V4 <- NULL
+# V4$col <- 4
+# V4$name <- "CCretp"
+# V4$tier <- 4
+# V4$requires <- c("C","YC","CCraw")
+# V4$ID <- 1101005
+# V4$type <- "Ret"
+# V4$use <- "model"
+# V4$calc_cmn <- TRUE
+# V4$math[1] <- "from.var.env,'CCraw'"
+# V4$math[2] <- "calc_cap,abscap=0.05"
+# 
+# com.env$v.com$CCretp <- V4
+# com.env$vcom_names <- c(com.env$vcom_names,V4$name)
+# rm(V4)
 
 
 
